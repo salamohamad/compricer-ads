@@ -1,0 +1,1104 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Meta- och Google-annonsförhandsvisningar för Compricer.">
+  <title>Compricer | Ad Preview</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #f0f2f5;
+      --surface: #ffffff;
+      --text: #050505;
+      --muted: #65676b;
+      --line: #ced0d4;
+      --soft-line: #e4e6eb;
+      --hover: #f2f2f2;
+      --blue: #2a7de1;
+      --pink: #f97fb5;
+      --navy: #000000;
+      --shadow: 0 2px 12px rgb(0 0 0 / 8%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      background: var(--page);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      padding: 10px clamp(18px, 4vw, 52px);
+      border-bottom: 1px solid var(--soft-line);
+      background: rgb(255 255 255 / 94%);
+      box-shadow: 0 1px 6px rgb(0 0 0 / 6%);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark,
+    .page-avatar {
+      display: block;
+      flex: 0 0 auto;
+      overflow: hidden;
+      border: 1px solid rgb(0 0 0 / 9%);
+      border-radius: 50%;
+      background: white;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      box-shadow: 0 5px 16px rgb(42 125 225 / 22%);
+    }
+
+    .avatar-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: -0.2px;
+    }
+
+    .brand-subtitle {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .count {
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: #e7f3ff;
+      color: #0059c9;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    main {
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: clamp(26px, 5vw, 58px) clamp(14px, 3vw, 28px) 72px;
+    }
+
+    .intro {
+      max-width: 680px;
+      margin: 0 auto clamp(24px, 4vw, 38px);
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 9px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(29px, 5vw, 48px);
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+    }
+
+    .intro-copy {
+      margin: 14px auto 0;
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 17px);
+      line-height: 1.5;
+    }
+
+    .preview-controls {
+      display: grid;
+      max-width: 860px;
+      margin: 0 auto clamp(24px, 4vw, 38px);
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid #dde0e5;
+      border-radius: 14px;
+      background: rgb(255 255 255 / 88%);
+      box-shadow: 0 8px 30px rgb(42 125 225 / 8%);
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .control-label {
+      flex: 0 0 72px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .segmented-control {
+      display: flex;
+      min-width: 0;
+      flex: 1;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .format-button {
+      min-height: 38px;
+      padding: 8px 13px;
+      border: 1px solid #d7d9de;
+      border-radius: 999px;
+      background: white;
+      color: #33363b;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .format-button:hover {
+      border-color: #a9adb5;
+      background: #f7f8fa;
+    }
+
+    .format-button[aria-pressed="true"] {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: white;
+      box-shadow: 0 4px 14px rgb(42 125 225 / 22%);
+    }
+
+    .format-button:disabled {
+      border-color: #e4e6ea;
+      background: #f4f5f7;
+      color: #969aa2;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .tab-count {
+      display: inline-grid;
+      min-width: 20px;
+      height: 20px;
+      margin-left: 5px;
+      padding: 0 5px;
+      place-items: center;
+      border-radius: 999px;
+      background: #eceef2;
+      color: #555960;
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .format-button[aria-pressed="true"] .tab-count {
+      background: rgb(255 255 255 / 18%);
+      color: white;
+    }
+
+    .format-button[hidden] {
+      display: none;
+    }
+
+    .format-status {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 11px 13px;
+      border-radius: 9px;
+      background: #edf5ff;
+      color: #234369;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      margin-top: 5px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #1877f2;
+    }
+
+    .format-status.needs-assets {
+      background: #fff5df;
+      color: #694b0d;
+    }
+
+    .format-status.needs-assets .status-dot {
+      background: #e89b00;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 500px));
+      justify-content: center;
+      gap: clamp(20px, 3vw, 32px);
+      align-items: start;
+    }
+
+    .ad-shell {
+      overflow: hidden;
+      border: 1px solid #dddfe2;
+      border-radius: 10px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .ad-header {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px 16px 10px;
+    }
+
+    .page-avatar {
+      width: 40px;
+      height: 40px;
+      margin-right: 9px;
+    }
+
+    .page-details {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .page-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 19px;
+      text-decoration: none;
+    }
+
+    .verified {
+      display: inline-grid;
+      width: 14px;
+      height: 14px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      font-size: 9px;
+    }
+
+    .sponsored {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 16px;
+    }
+
+    .globe {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    .more {
+      width: 36px;
+      height: 36px;
+      margin: -3px -8px 0 5px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--muted);
+      cursor: default;
+      font-size: 25px;
+      line-height: 1;
+    }
+
+    .ad-copy {
+      min-height: 65px;
+      margin: 0;
+      padding: 0 16px 12px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .creative-wrap {
+      border-top: 1px solid var(--soft-line);
+      background: #ececec;
+    }
+
+    .creative {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: var(--preview-ratio, 1);
+      object-fit: cover;
+    }
+
+    .video-creative {
+      aspect-ratio: var(--preview-ratio, 4 / 5);
+      background: #101010;
+      object-fit: contain;
+    }
+
+    .link-card {
+      display: flex;
+      min-height: 86px;
+      align-items: center;
+      gap: 16px;
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--soft-line);
+      background: #f5f6f7;
+    }
+
+    .link-details {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .link-title {
+      display: -webkit-box;
+      overflow: hidden;
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 22px;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .cta {
+      display: inline-flex;
+      flex: 0 0 auto;
+      min-width: 104px;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 17px;
+      border: 0;
+      border-radius: 8px;
+      background: #e1e4e8;
+      color: #050505;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .cta:hover {
+      background: #d8dbe0;
+    }
+
+    .social-proof {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 42px;
+      margin: 0 16px;
+      border-bottom: 1px solid var(--soft-line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .reactions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reaction-icons {
+      display: flex;
+    }
+
+    .reaction {
+      display: grid;
+      width: 20px;
+      height: 20px;
+      place-items: center;
+      margin-right: -3px;
+      border: 2px solid white;
+      border-radius: 50%;
+      color: white;
+      font-size: 10px;
+    }
+
+    .like {
+      background: var(--blue);
+    }
+
+    .heart {
+      background: #f55368;
+    }
+
+    .engagement {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      padding: 4px 10px;
+    }
+
+    .engagement span {
+      display: flex;
+      min-height: 36px;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .engagement svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.8;
+    }
+
+    .google-shell {
+      overflow: hidden;
+      border: 1px solid #dfe1e5;
+      border-radius: 12px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .google-card-header {
+      display: flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 14px;
+      border-bottom: 1px solid #e7e8eb;
+    }
+
+    .google-brand {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .google-brand .page-avatar {
+      margin: 0;
+    }
+
+    .google-brand-copy {
+      min-width: 0;
+    }
+
+    .google-brand-copy strong,
+    .google-brand-copy span {
+      display: block;
+    }
+
+    .google-brand-copy strong {
+      font-size: 14px;
+    }
+
+    .google-brand-copy span {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .dimension-badge {
+      flex: 0 0 auto;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #eef1f5;
+      color: #50545a;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .google-creative-stage {
+      position: relative;
+      display: grid;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: var(--preview-ratio, 1 / 1);
+      place-items: center;
+      background-color: #eef0f4;
+      background-image:
+        linear-gradient(45deg, rgb(255 255 255 / 48%) 25%, transparent 25%),
+        linear-gradient(-45deg, rgb(255 255 255 / 48%) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgb(255 255 255 / 48%) 75%),
+        linear-gradient(-45deg, transparent 75%, rgb(255 255 255 / 48%) 75%);
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+      background-size: 20px 20px;
+    }
+
+    .google-creative {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .google-ad-footer {
+      display: flex;
+      min-height: 84px;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 14px;
+      border-top: 1px solid #e3e5e8;
+    }
+
+    .google-ad-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .google-ad-copy strong {
+      display: -webkit-box;
+      overflow: hidden;
+      font-size: 16px;
+      line-height: 21px;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .google-ad-copy span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .google-cta {
+      display: inline-flex;
+      min-width: 96px;
+      min-height: 42px;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 5px;
+      background: #1a73e8;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .google-cta:hover {
+      background: #1765cc;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      max-width: 680px;
+      margin: 10px auto;
+      padding: clamp(34px, 7vw, 68px) clamp(22px, 5vw, 52px);
+      border: 1px dashed #c8cbd1;
+      border-radius: 14px;
+      background: rgb(255 255 255 / 72%);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state strong {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--navy);
+      font-size: clamp(20px, 4vw, 28px);
+    }
+
+    .empty-state p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .footer-note {
+      margin: 34px auto 0;
+      color: #7d7f84;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .preview-grid {
+        grid-template-columns: minmax(0, 500px);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .topbar {
+        min-height: 58px;
+        padding: 8px 13px;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        font-size: 21px;
+      }
+
+      .brand-title {
+        font-size: 15px;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      main {
+        padding: 28px 0 50px;
+      }
+
+      .intro {
+        padding: 0 20px;
+      }
+
+      .preview-controls {
+        margin-right: 12px;
+        margin-left: 12px;
+        padding: 14px;
+        border-radius: 11px;
+      }
+
+      .control-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .control-label {
+        flex-basis: auto;
+      }
+
+      .segmented-control {
+        width: 100%;
+      }
+
+      .format-button {
+        flex: 1 1 auto;
+      }
+
+      .ad-shell {
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .google-shell {
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <img class="avatar-image" src="assets/compricer-avatar.png" alt="">
+      </div>
+      <div>
+        <p class="brand-title"><strong>Compricer</strong> Ad Preview</p>
+        <p class="brand-subtitle" id="brand-subtitle">Meta Feed</p>
+      </div>
+    </div>
+    <span class="count" id="ad-count">0 annonser</span>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">Creative review</p>
+      <h1 id="page-title">Annons­förhandsvisning</h1>
+      <p class="intro-copy" id="intro-copy">Jämför hur samma kampanj visas i Meta- och Google-format.</p>
+    </section>
+
+    <section class="preview-controls" aria-label="Välj medietyp, kanal och format">
+      <div class="control-row">
+        <span class="control-label">Media</span>
+        <div class="segmented-control" id="media-controls">
+          <button class="format-button" type="button" data-media="photo" aria-pressed="true">
+            Bilder <span class="tab-count" data-media-count="photo">0</span>
+          </button>
+          <button class="format-button" type="button" data-media="video" aria-pressed="false">
+            Video <span class="tab-count" data-media-count="video">0</span>
+          </button>
+        </div>
+      </div>
+      <div class="control-row">
+        <span class="control-label">Kanal</span>
+        <div class="segmented-control" id="platform-controls">
+          <button class="format-button" type="button" data-platform="meta" aria-pressed="true">
+            Meta <span class="tab-count" data-platform-count="meta">0</span>
+          </button>
+          <button class="format-button" type="button" data-platform="google" aria-pressed="false">
+            Google <span class="tab-count" data-platform-count="google">0</span>
+          </button>
+        </div>
+      </div>
+      <div class="control-row">
+        <span class="control-label">Format</span>
+        <div class="segmented-control" id="format-controls"></div>
+      </div>
+      <div class="format-status" id="format-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="format-status-text">Inga annonser uppladdade ännu.</span>
+      </div>
+    </section>
+
+    <section class="preview-grid" id="preview-grid" aria-label="Ad previews"></section>
+
+    <p class="footer-note">Förhandsvisningen är en visuell simulering och är inte ansluten till Meta eller Google.</p>
+  </main>
+
+  <script src="assets/manifest.js"></script>
+  <script>
+    // Content lives in assets/manifest.json (loaded via assets/manifest.js and
+    // maintained by the Compricer kit's scripts/publish_preview.py). Each item names its file,
+    // media, platform and the dimension collection it was measured into.
+    const formats = {
+      "meta-square": { media: "photo", platform: "meta", label: "Meta Feed 1:1", short: "Feed 1:1", dimensions: "1080 × 1080", ratio: "1 / 1" },
+      "meta-portrait": { media: "photo", platform: "meta", label: "Meta Feed 4:5", short: "Feed 4:5", dimensions: "1080 × 1350", ratio: "4 / 5" },
+      "meta-story": { media: "photo", platform: "meta", label: "Meta Story 9:16", short: "Story 9:16", dimensions: "1080 × 1920", ratio: "9 / 16" },
+      "meta-video-portrait": { media: "video", platform: "meta", label: "Meta Feed Video 4:5", short: "Feed video 4:5", dimensions: "1080 × 1350", duration: "9–16 sekunder", ratio: "4 / 5" },
+      "meta-reels": { media: "video", platform: "meta", label: "Meta Reels 9:16", short: "Reels 9:16", dimensions: "1080 × 1920", duration: "upp till 90 sekunder", ratio: "9 / 16" },
+      "google-youtube-video": { media: "video", platform: "google", label: "Google Video 16:9", short: "Video 16:9", dimensions: "1920 × 1080", minimum: "1280 × 720", duration: "10–60 sekunder", ratio: "16 / 9" },
+      "google-youtube-shorts": { media: "video", platform: "google", label: "Google Video 9:16", short: "Video 9:16", dimensions: "1080 × 1920", duration: "10–60 sekunder", ratio: "9 / 16" },
+      "google-youtube-square": { media: "video", platform: "google", label: "Google Video 1:1", short: "Video 1:1", dimensions: "1080 × 1080", duration: "10–60 sekunder", ratio: "1 / 1" },
+      "google-youtube-portrait": { media: "video", platform: "google", label: "Google Video 4:5", short: "Video 4:5", dimensions: "1080 × 1350", duration: "10–60 sekunder", ratio: "4 / 5" },
+      "google-square": { media: "photo", platform: "google", label: "Google Square", short: "Square", dimensions: "1200 × 1200", minimum: "300 × 300", ratio: "1 / 1" },
+      "google-landscape": { media: "photo", platform: "google", label: "Google Landscape", short: "Landscape", dimensions: "1200 × 628", minimum: "600 × 314", ratio: "1200 / 628" },
+      "google-portrait": { media: "photo", platform: "google", label: "Google Portrait", short: "Portrait", dimensions: "960 × 1200", minimum: "480 × 600", ratio: "4 / 5" },
+      "google-story": { media: "photo", platform: "google", label: "Google Story 9:16", short: "Story 9:16", dimensions: "1080 × 1920", minimum: "600 × 1067", ratio: "9 / 16" }
+    };
+    Object.keys(formats).forEach((key) => { formats[key].collectionKey = key; });
+
+    const manifest = window.COMPRICER_MANIFEST || { items: [] };
+    const collections = Object.fromEntries(Object.keys(formats).map((key) => [key, []]));
+    manifest.items.forEach((item) => {
+      if (!collections[item.format]) return;
+      collections[item.format].push({
+        ...item,
+        image: item.media === "photo" ? item.file : undefined,
+        video: item.media === "video" ? item.file : undefined
+      });
+    });
+
+    let selectedMedia = "photo";
+    let selectedPlatform = "meta";
+    let selectedFormat = "meta-square";
+
+    const globeIcon = `
+      <svg class="globe" viewBox="0 0 24 24" aria-label="Offentlig">
+        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.92 6h-3.17a15.7 15.7 0 0 0-1.38-3.56A8.05 8.05 0 0 1 18.92 8ZM12 4c.83 1.2 1.46 2.55 1.83 4h-3.66A13.7 13.7 0 0 1 12 4ZM4.26 14a8 8 0 0 1 0-4h3.41a16.4 16.4 0 0 0 0 4H4.26Zm.82 2h3.17c.3 1.27.77 2.46 1.38 3.56A8.05 8.05 0 0 1 5.08 16Zm3.17-8H5.08a8.05 8.05 0 0 1 4.55-3.56A15.7 15.7 0 0 0 8.25 8ZM12 20a13.7 13.7 0 0 1-1.83-4h3.66A13.7 13.7 0 0 1 12 20Zm2.25-6h-4.5a14.3 14.3 0 0 1 0-4h4.5a14.3 14.3 0 0 1 0 4Zm.12 5.56c.61-1.1 1.08-2.29 1.38-3.56h3.17a8.05 8.05 0 0 1-4.55 3.56ZM16.33 14a16.4 16.4 0 0 0 0-4h3.41a8 8 0 0 1 0 4h-3.41Z"/>
+      </svg>`;
+
+    const engagementIcons = {
+      like: '<svg viewBox="0 0 24 24"><path d="M7 10v11H3V10h4Zm2 11h8.6a2 2 0 0 0 1.94-1.53l1.35-5.5A2 2 0 0 0 18.94 11H15l.7-3.36A3 3 0 0 0 12.76 4H12l-3 6v11Z"/></svg>',
+      comment: '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 9.8 9.8 0 0 1-4-.9L3 21l1.7-4.3A8.2 8.2 0 0 1 3 11.5 8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></svg>',
+      share: '<svg viewBox="0 0 24 24"><path d="m13 5 7 7-7 7v-4c-5 0-8 1.5-10 4 1-5 4-9 10-10V5Z"/></svg>'
+    };
+
+    function renderMetaAd(ad, index, format) {
+      const likes = 18 + ((index * 7) % 29);
+      const comments = 2 + (index % 6);
+      const loading = index < 2 ? "eager" : "lazy";
+      const creative = ad.video
+        ? `
+            <video
+              class="creative video-creative"
+              controls
+              playsinline
+              preload="metadata"
+              aria-label="${ad.alt}"
+            >
+              <source src="assets/${ad.video}" type="video/mp4">
+              Din webbläsare kan inte spela upp videon.
+            </video>`
+        : `<img class="creative" src="assets/${ad.image}" alt="Compricer-annons: ${ad.alt}" loading="${loading}">`;
+
+      return `
+        <article class="ad-shell">
+          <header class="ad-header">
+            <div class="page-avatar" aria-hidden="true">
+              <img class="avatar-image" src="assets/compricer-avatar.png" alt="">
+            </div>
+            <div class="page-details">
+              <a class="page-name" href="https://www.compricer.se/" target="_blank" rel="noopener noreferrer">
+                Compricer
+                <span class="verified" aria-label="Verifierad">✓</span>
+              </a>
+              <div class="sponsored">Sponsrad · ${globeIcon}</div>
+            </div>
+            <button class="more" type="button" aria-label="Fler alternativ">•••</button>
+          </header>
+
+          <p class="ad-copy">${ad.copy}</p>
+
+          <div class="creative-wrap" style="--preview-ratio: ${format.ratio}">
+            ${creative}
+          </div>
+
+          <div class="link-card">
+            <div class="link-details">
+              <p class="link-title">${ad.title}</p>
+            </div>
+            <a class="cta" href="${ad.url}" target="_blank" rel="noopener noreferrer">Jämför nu</a>
+          </div>
+
+          <div class="social-proof">
+            <div class="reactions">
+              <span class="reaction-icons" aria-hidden="true">
+                <span class="reaction like">●</span>
+                <span class="reaction heart">♥</span>
+              </span>
+              <span>${likes}</span>
+            </div>
+            <span>${comments} kommentarer</span>
+          </div>
+
+          <div class="engagement" aria-hidden="true">
+            <span>${engagementIcons.like} Gilla</span>
+            <span>${engagementIcons.comment} Kommentera</span>
+            <span>${engagementIcons.share} Dela</span>
+          </div>
+        </article>`;
+    }
+
+    function renderGoogleAd(ad, index, format) {
+      const loading = index < 4 ? "eager" : "lazy";
+      const creative = ad.video
+        ? `
+            <video
+              class="google-creative video-creative"
+              controls
+              playsinline
+              preload="metadata"
+              aria-label="${ad.alt}"
+            >
+              <source src="assets/${ad.video}" type="video/mp4">
+              Din webbläsare kan inte spela upp videon.
+            </video>`
+        : `
+            <img
+              class="google-creative"
+              src="assets/${ad.image}"
+              alt="Compricer-annons: ${ad.alt}"
+              loading="${loading}"
+            >`;
+
+      return `
+        <article class="google-shell">
+          <header class="google-card-header">
+            <div class="google-brand">
+              <div class="page-avatar" aria-hidden="true">
+                <img class="avatar-image" src="assets/compricer-avatar.png" alt="">
+              </div>
+              <div class="google-brand-copy">
+                <strong>Compricer</strong>
+                <span>Google Ads asset</span>
+              </div>
+            </div>
+            <span class="dimension-badge">${format.dimensions}</span>
+          </header>
+
+          <div class="google-creative-stage" style="--preview-ratio: ${format.ratio}">
+            ${creative}
+          </div>
+
+          <div class="google-ad-footer">
+            <div class="google-ad-copy">
+              <strong>${ad.title}</strong>
+              <span>compricer.se</span>
+            </div>
+            <a class="google-cta" href="${ad.url}" target="_blank" rel="noopener noreferrer">Jämför nu</a>
+          </div>
+        </article>`;
+    }
+
+    function renderEmptyState(format) {
+      const assetType = format.media === "video" ? "videor" : "bilder";
+      const platformNote = format.platform === "google" && format.media === "video"
+        ? "Google/YouTube-videor ska ligga i en egen videosamling och blandas inte med Meta-videor."
+        : "Den här fliken visar endast " + assetType + " som tillhör formatets egen dimensionssamling.";
+      return `
+        <div class="empty-state">
+          <strong>Inga ${format.label}-${assetType} uppladdade ännu</strong>
+          <p>
+            ${platformNote}
+            Ladda upp ${format.dimensions}${format.minimum ? ` eller minst ${format.minimum}` : ""}
+            så läggs filen till här.
+          </p>
+        </div>`;
+    }
+
+    function updateStatus(format, items) {
+      const status = document.getElementById("format-status");
+      const statusText = document.getElementById("format-status-text");
+      const noun = format.media === "video" ? "videor" : "bilder";
+      status.classList.toggle("needs-assets", items.length === 0);
+      statusText.textContent = items.length > 0
+        ? `${items.length} ${format.label}-${noun} visas. Filerna är verifierade i ${format.dimensions}${format.duration ? `, ${format.duration}` : ""} och tillhör endast den här dimensionssamlingen.`
+        : `Inga ${format.label}-${noun} uppladdade ännu. Rekommenderat ${format.dimensions}${format.minimum ? `, minimum ${format.minimum}` : ""}.`;
+    }
+
+    function totalFor(media, platform) {
+      return Object.values(formats)
+        .filter((format) => format.media === media && format.platform === platform)
+        .reduce((total, format) => total + collections[format.collectionKey].length, 0);
+    }
+
+    function defaultFormatFor(media, platform) {
+      return Object.keys(formats).find((key) => {
+        const format = formats[key];
+        return format.media === media && format.platform === platform;
+      });
+    }
+
+    function renderFormatButtons() {
+      const container = document.getElementById("format-controls");
+      container.innerHTML = Object.keys(formats).map((key) => {
+        const format = formats[key];
+        return `<button class="format-button" type="button" data-format="${key}" hidden aria-pressed="false">
+            ${format.short} · ${format.dimensions} <span class="tab-count" data-format-count="${key}">0</span>
+          </button>`;
+      }).join("");
+    }
+
+    function updateControls() {
+      const photoTotal = Object.values(formats)
+        .filter((format) => format.media === "photo")
+        .reduce((total, format) => total + collections[format.collectionKey].length, 0);
+      const videoTotal = Object.values(formats)
+        .filter((format) => format.media === "video")
+        .reduce((total, format) => total + collections[format.collectionKey].length, 0);
+
+      document.querySelector('[data-media-count="photo"]').textContent = photoTotal;
+      document.querySelector('[data-media-count="video"]').textContent = videoTotal;
+
+      document.querySelectorAll("[data-media]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.media === selectedMedia));
+      });
+
+      document.querySelectorAll("[data-platform-count]").forEach((count) => {
+        count.textContent = totalFor(selectedMedia, count.dataset.platformCount);
+      });
+
+      document.querySelectorAll("[data-format-count]").forEach((count) => {
+        count.textContent = collections[count.dataset.formatCount].length;
+      });
+
+      document.querySelectorAll("[data-platform]").forEach((button) => {
+        const hasFormat = Boolean(defaultFormatFor(selectedMedia, button.dataset.platform));
+        button.disabled = !hasFormat;
+        button.setAttribute("aria-pressed", String(button.dataset.platform === selectedPlatform));
+      });
+
+      document.querySelectorAll("[data-format]").forEach((button) => {
+        const format = formats[button.dataset.format];
+        button.hidden = format.media !== selectedMedia || format.platform !== selectedPlatform;
+        button.setAttribute("aria-pressed", String(button.dataset.format === selectedFormat));
+      });
+    }
+
+    function renderPreview() {
+      const format = formats[selectedFormat];
+      const items = collections[format.collectionKey];
+      const grid = document.getElementById("preview-grid");
+
+      if (items.length === 0) {
+        grid.innerHTML = renderEmptyState(format);
+      } else {
+        grid.innerHTML = format.platform === "meta"
+          ? items.map((ad, index) => renderMetaAd(ad, index, format)).join("")
+          : items.map((ad, index) => renderGoogleAd(ad, index, format)).join("");
+      }
+
+      document.getElementById("ad-count").textContent = `${items.length} annonser`;
+      document.getElementById("brand-subtitle").textContent = format.label;
+      document.getElementById("intro-copy").textContent = format.media === "video"
+        ? format.platform === "meta"
+          ? "Meta-videokort med primärtext, inbyggd spelare, destination och CTA."
+          : `${format.label} · visar endast uppladdningar i denna dimensionssamling.`
+        : format.platform === "meta"
+          ? "Facebook-liknande feedkort med primärtext, kreativ, destination och CTA."
+          : `${format.label} · visar endast uppladdningar i denna dimensionssamling.`;
+      grid.setAttribute("aria-label", `${format.label} previews`);
+
+      updateControls();
+      updateStatus(format, items);
+    }
+
+    document.getElementById("media-controls").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-media]");
+      if (!button) return;
+
+      selectedMedia = button.dataset.media;
+      selectedPlatform = "meta";
+      selectedFormat = defaultFormatFor(selectedMedia, selectedPlatform);
+      renderPreview();
+    });
+
+    document.getElementById("platform-controls").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-platform]");
+      if (!button || button.disabled) return;
+
+      selectedPlatform = button.dataset.platform;
+      selectedFormat = defaultFormatFor(selectedMedia, selectedPlatform);
+      renderPreview();
+    });
+
+    document.getElementById("format-controls").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-format]");
+      if (!button || button.hidden) return;
+
+      selectedFormat = button.dataset.format;
+      selectedPlatform = formats[selectedFormat].platform;
+      renderPreview();
+    });
+
+    renderFormatButtons();
+    renderPreview();
+  </script>
+</body>
+</html>
