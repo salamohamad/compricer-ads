@@ -119,7 +119,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-wan",
       "sha256": "475980bb35a33fd3",
-      "duration_s": 5.0
+      "duration_s": 5.0,
+      "status": "draft"
     },
     {
       "file": "moped-wan__youtube-shorts.mp4",
@@ -136,7 +137,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-wan",
       "sha256": "f00de6b016ef61aa",
-      "duration_s": 5.0
+      "duration_s": 5.0,
+      "status": "draft"
     },
     {
       "file": "moped-wan__youtube-portrait.mp4",
@@ -153,7 +155,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-wan",
       "sha256": "36cba8007be2134b",
-      "duration_s": 5.0
+      "duration_s": 5.0,
+      "status": "draft"
     },
     {
       "file": "moped-wan__youtube-landscape.mp4",
@@ -170,7 +173,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-wan",
       "sha256": "4a018cff108b60d5",
-      "duration_s": 5.0
+      "duration_s": 5.0,
+      "status": "draft"
     },
     {
       "file": "moped-wan__meta-reels.mp4",
@@ -187,7 +191,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-wan",
       "sha256": "1c5dfe6c2a9f7a69",
-      "duration_s": 5.0
+      "duration_s": 5.0,
+      "status": "draft"
     },
     {
       "file": "moped-wan__meta-feed-video.mp4",
@@ -204,7 +209,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-wan",
       "sha256": "1c311b54aad3f337",
-      "duration_s": 5.0
+      "duration_s": 5.0,
+      "status": "draft"
     }
   ]
 };
