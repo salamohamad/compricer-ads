@@ -17,7 +17,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-15",
       "sha256": "0b513757322457e5",
-      "duration_s": 10.6
+      "duration_s": 10.6,
+      "status": "draft"
     },
     {
       "file": "moped-15__youtube-shorts.mp4",
@@ -34,7 +35,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-15",
       "sha256": "e7decc6f88bbe5eb",
-      "duration_s": 10.6
+      "duration_s": 10.6,
+      "status": "draft"
     },
     {
       "file": "moped-15__youtube-portrait.mp4",
@@ -51,7 +53,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-15",
       "sha256": "3862fa751491cd89",
-      "duration_s": 10.6
+      "duration_s": 10.6,
+      "status": "draft"
     },
     {
       "file": "moped-15__youtube-landscape.mp4",
@@ -68,7 +71,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-15",
       "sha256": "50ecc0d2390dc017",
-      "duration_s": 15.0
+      "duration_s": 15.0,
+      "status": "draft"
     },
     {
       "file": "moped-15__meta-reels.mp4",
@@ -85,7 +89,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-15",
       "sha256": "641ce0f8c23f8421",
-      "duration_s": 10.6
+      "duration_s": 10.6,
+      "status": "draft"
     },
     {
       "file": "moped-15__meta-feed-video.mp4",
@@ -102,7 +107,8 @@ window.COMPRICER_MANIFEST = {
       "source": "compricer-kit",
       "draft": "moped-15",
       "sha256": "4b662edf6b390cd3",
-      "duration_s": 10.6
+      "duration_s": 10.6,
+      "status": "draft"
     },
     {
       "file": "moped-wan__youtube-square.mp4",
