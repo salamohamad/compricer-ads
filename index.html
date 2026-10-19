@@ -541,6 +541,34 @@
       font-size: 12px;
     }
 
+    .status-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eceef2;
+      color: #50545a;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      vertical-align: middle;
+    }
+
+    .status-badge.accepted {
+      background: #e3f6e8;
+      color: #0f6b2f;
+    }
+
+    .status-badge.rejected {
+      background: #fdebec;
+      color: #8f171f;
+    }
+
+    .status-badge.iterate {
+      background: #fff5df;
+      color: #694b0d;
+    }
+
     .dimension-badge {
       flex: 0 0 auto;
       padding: 6px 9px;
@@ -839,6 +867,12 @@
       share: '<svg viewBox="0 0 24 24"><path d="m13 5 7 7-7 7v-4c-5 0-8 1.5-10 4 1-5 4-9 10-10V5Z"/></svg>'
     };
 
+    const statusLabels = { draft: "Utkast", accepted: "Godkänd", iterate: "Iteration begärd", rejected: "Avvisad" };
+    function statusBadge(ad) {
+      const key = ad.status || "draft";
+      return `<span class="status-badge ${key}">${statusLabels[key] || key}</span>`;
+    }
+
     function renderMetaAd(ad, index, format) {
       const likes = 18 + ((index * 7) % 29);
       const comments = 2 + (index % 6);
@@ -868,7 +902,7 @@
                 Compricer
                 <span class="verified" aria-label="Verifierad">✓</span>
               </a>
-              <div class="sponsored">Sponsrad · ${globeIcon}</div>
+              <div class="sponsored">Sponsrad · ${globeIcon} ${statusBadge(ad)}</div>
             </div>
             <button class="more" type="button" aria-label="Fler alternativ">•••</button>
           </header>
@@ -939,7 +973,7 @@
                 <span>Google Ads asset</span>
               </div>
             </div>
-            <span class="dimension-badge">${format.dimensions}</span>
+            <span><span class="dimension-badge">${format.dimensions}</span>${statusBadge(ad)}</span>
           </header>
 
           <div class="google-creative-stage" style="--preview-ratio: ${format.ratio}">
