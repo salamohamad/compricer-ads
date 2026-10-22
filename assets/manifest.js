@@ -3,6 +3,116 @@ window.COMPRICER_MANIFEST = {
   "version": 1,
   "items": [
     {
+      "file": "moped-fal__meta-square.png",
+      "media": "photo",
+      "platform": "meta",
+      "format": "meta-square",
+      "title": "Orka jämföra mopedförsäkring?",
+      "copy": "Jämför på 30 sekunder och se om du kan få bättre pris.",
+      "alt": "Compricer-annons: Orka jämföra mopedförsäkring?",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 1080,
+      "height": 1080,
+      "source": "compricer-kit",
+      "draft": "moped-fal",
+      "sha256": "76697039d5a34c6d",
+      "status": "draft",
+      "cost_label": "0,06 USD",
+      "cost_total": {
+        "USD": 0.06,
+        "credits": 0.0
+      }
+    },
+    {
+      "file": "moped-fal__google-story.png",
+      "media": "photo",
+      "platform": "google",
+      "format": "google-story",
+      "title": "Orka jämföra mopedförsäkring?",
+      "copy": "Jämför på 30 sekunder och se om du kan få bättre pris.",
+      "alt": "Compricer-annons: Orka jämföra mopedförsäkring?",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 1080,
+      "height": 1920,
+      "source": "compricer-kit",
+      "draft": "moped-fal",
+      "sha256": "df2e69f86ce642d4",
+      "status": "draft",
+      "cost_label": "0,06 USD",
+      "cost_total": {
+        "USD": 0.06,
+        "credits": 0.0
+      }
+    },
+    {
+      "file": "moped-fal__google-square.png",
+      "media": "photo",
+      "platform": "google",
+      "format": "google-square",
+      "title": "Orka jämföra mopedförsäkring?",
+      "copy": "Jämför på 30 sekunder och se om du kan få bättre pris.",
+      "alt": "Compricer-annons: Orka jämföra mopedförsäkring?",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 1200,
+      "height": 1200,
+      "source": "compricer-kit",
+      "draft": "moped-fal",
+      "sha256": "b89413d01d5ef16d",
+      "status": "draft",
+      "cost_label": "0,06 USD",
+      "cost_total": {
+        "USD": 0.06,
+        "credits": 0.0
+      }
+    },
+    {
+      "file": "moped-fal__google-portrait.png",
+      "media": "photo",
+      "platform": "google",
+      "format": "google-portrait",
+      "title": "Orka jämföra mopedförsäkring?",
+      "copy": "Jämför på 30 sekunder och se om du kan få bättre pris.",
+      "alt": "Compricer-annons: Orka jämföra mopedförsäkring?",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 960,
+      "height": 1200,
+      "source": "compricer-kit",
+      "draft": "moped-fal",
+      "sha256": "0cccd19639201935",
+      "status": "draft",
+      "cost_label": "0,06 USD",
+      "cost_total": {
+        "USD": 0.06,
+        "credits": 0.0
+      }
+    },
+    {
+      "file": "moped-fal__google-landscape.png",
+      "media": "photo",
+      "platform": "google",
+      "format": "google-landscape",
+      "title": "Orka jämföra mopedförsäkring?",
+      "copy": "Jämför på 30 sekunder och se om du kan få bättre pris.",
+      "alt": "Compricer-annons: Orka jämföra mopedförsäkring?",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 1200,
+      "height": 628,
+      "source": "compricer-kit",
+      "draft": "moped-fal",
+      "sha256": "cf5bb77a43a521fd",
+      "status": "draft",
+      "cost_label": "0,06 USD",
+      "cost_total": {
+        "USD": 0.06,
+        "credits": 0.0
+      }
+    },
+    {
       "file": "katt-smoke__meta-square.png",
       "media": "photo",
       "platform": "meta",
