@@ -569,6 +569,20 @@
       color: #694b0d;
     }
 
+    .cost-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #fff3cc;
+      color: #5c4600;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
     .dimension-badge {
       flex: 0 0 auto;
       padding: 6px 9px;
@@ -872,6 +886,11 @@
       const key = ad.status || "draft";
       return `<span class="status-badge ${key}">${statusLabels[key] || key}</span>`;
     }
+    // Generation cost of the draft this file belongs to (from the kit's spend ledger).
+    function costBadge(ad) {
+      if (!ad.cost_label) return "";
+      return `<span class="cost-badge" title="Genereringskostnad för utkastet (AI-modeller), från kitets utgiftsliggare">Kostnad ${ad.cost_label}</span>`;
+    }
 
     function renderMetaAd(ad, index, format) {
       const likes = 18 + ((index * 7) % 29);
@@ -902,7 +921,7 @@
                 Compricer
                 <span class="verified" aria-label="Verifierad">✓</span>
               </a>
-              <div class="sponsored">Sponsrad · ${globeIcon} ${statusBadge(ad)}</div>
+              <div class="sponsored">Sponsrad · ${globeIcon} ${statusBadge(ad)}${costBadge(ad)}</div>
             </div>
             <button class="more" type="button" aria-label="Fler alternativ">•••</button>
           </header>
@@ -973,7 +992,7 @@
                 <span>Google Ads asset</span>
               </div>
             </div>
-            <span><span class="dimension-badge">${format.dimensions}</span>${statusBadge(ad)}</span>
+            <span><span class="dimension-badge">${format.dimensions}</span>${statusBadge(ad)}${costBadge(ad)}</span>
           </header>
 
           <div class="google-creative-stage" style="--preview-ratio: ${format.ratio}">
