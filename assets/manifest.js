@@ -3,6 +3,116 @@ window.COMPRICER_MANIFEST = {
   "version": 1,
   "items": [
     {
+      "file": "katt-smoke__meta-square.png",
+      "media": "photo",
+      "platform": "meta",
+      "format": "meta-square",
+      "title": "Jämför din kattförsäkring",
+      "copy": "Se vad försäkringsbolagen erbjuder på Compricer",
+      "alt": "Compricer-annons: Jämför din kattförsäkring",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 1080,
+      "height": 1080,
+      "source": "compricer-kit",
+      "draft": "katt-smoke",
+      "sha256": "8dbe1f380badb0e6",
+      "status": "draft",
+      "cost_label": "0 USD",
+      "cost_total": {
+        "USD": 0.0,
+        "credits": 0.0
+      }
+    },
+    {
+      "file": "katt-smoke__google-story.png",
+      "media": "photo",
+      "platform": "google",
+      "format": "google-story",
+      "title": "Jämför din kattförsäkring",
+      "copy": "Se vad försäkringsbolagen erbjuder på Compricer",
+      "alt": "Compricer-annons: Jämför din kattförsäkring",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 1080,
+      "height": 1920,
+      "source": "compricer-kit",
+      "draft": "katt-smoke",
+      "sha256": "e6520410e997783d",
+      "status": "draft",
+      "cost_label": "0 USD",
+      "cost_total": {
+        "USD": 0.0,
+        "credits": 0.0
+      }
+    },
+    {
+      "file": "katt-smoke__google-square.png",
+      "media": "photo",
+      "platform": "google",
+      "format": "google-square",
+      "title": "Jämför din kattförsäkring",
+      "copy": "Se vad försäkringsbolagen erbjuder på Compricer",
+      "alt": "Compricer-annons: Jämför din kattförsäkring",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 1200,
+      "height": 1200,
+      "source": "compricer-kit",
+      "draft": "katt-smoke",
+      "sha256": "332d76685ba94206",
+      "status": "draft",
+      "cost_label": "0 USD",
+      "cost_total": {
+        "USD": 0.0,
+        "credits": 0.0
+      }
+    },
+    {
+      "file": "katt-smoke__google-portrait.png",
+      "media": "photo",
+      "platform": "google",
+      "format": "google-portrait",
+      "title": "Jämför din kattförsäkring",
+      "copy": "Se vad försäkringsbolagen erbjuder på Compricer",
+      "alt": "Compricer-annons: Jämför din kattförsäkring",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 960,
+      "height": 1200,
+      "source": "compricer-kit",
+      "draft": "katt-smoke",
+      "sha256": "67d4363fb696e61d",
+      "status": "draft",
+      "cost_label": "0 USD",
+      "cost_total": {
+        "USD": 0.0,
+        "credits": 0.0
+      }
+    },
+    {
+      "file": "katt-smoke__google-landscape.png",
+      "media": "photo",
+      "platform": "google",
+      "format": "google-landscape",
+      "title": "Jämför din kattförsäkring",
+      "copy": "Se vad försäkringsbolagen erbjuder på Compricer",
+      "alt": "Compricer-annons: Jämför din kattförsäkring",
+      "url": "https://www.compricer.se/",
+      "added": "2026-10-22",
+      "width": 1200,
+      "height": 628,
+      "source": "compricer-kit",
+      "draft": "katt-smoke",
+      "sha256": "dafb255205536b31",
+      "status": "draft",
+      "cost_label": "0 USD",
+      "cost_total": {
+        "USD": 0.0,
+        "credits": 0.0
+      }
+    },
+    {
       "file": "bil-tre__meta-square.png",
       "media": "photo",
       "platform": "meta",
