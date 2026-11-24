@@ -3,6 +3,30 @@ window.COMPRICER_MANIFEST = {
   "version": 1,
   "items": [
     {
+      "file": "elsladd-motion__youtube-square.mp4",
+      "media": "video",
+      "platform": "google",
+      "format": "google-youtube-square",
+      "title": "Elsladd som kopplas ihop av sig själv",
+      "copy": "Motion-test: sladdänden glider in i pluggen. Ingen text eller grafik (på begäran).",
+      "alt": "Compricer-annons: Elsladd som kopplas ihop av sig själv",
+      "url": "https://www.compricer.se/",
+      "added": "2026-11-24",
+      "width": 1080,
+      "height": 1080,
+      "source": "compricer-kit",
+      "draft": "elsladd-motion",
+      "sha256": "106926d74cd6fa79",
+      "status": "draft",
+      "cost_label": "220 Runway credits",
+      "cost_total": {
+        "runway_credits": 220.0,
+        "USD": 0.0,
+        "credits": 0.0
+      },
+      "duration_s": 5.0
+    },
+    {
       "file": "roret-brast__youtube-square-4.mp4",
       "media": "video",
       "platform": "google",
