@@ -2,6 +2,30 @@
   "version": 1,
   "items": [
     {
+      "file": "vinter-snodriva__meta-feed-video.mp4",
+      "media": "video",
+      "platform": "meta",
+      "format": "meta-video-portrait",
+      "title": "Snödrivan som landar på bilen (vinter, en tagning)",
+      "copy": "En sammanhängande tagning: snö från taket spräcker bilens vindruta, kameran glider genom köksfönstret till laptopen med Compricers bilförsäkringssida. Ingen text eller grafik (på begäran).",
+      "alt": "Compricer-annons: Snödrivan som landar på bilen (vinter, en tagning)",
+      "url": "https://www.compricer.se/",
+      "added": "2026-11-24",
+      "width": 1080,
+      "height": 1350,
+      "source": "compricer-kit",
+      "draft": "vinter-snodriva",
+      "sha256": "64392a51363e15f1",
+      "status": "draft",
+      "cost_label": "3,00 USD + 300 Runway credits",
+      "cost_total": {
+        "USD": 3.0,
+        "runway_credits": 300.0,
+        "credits": 0.0
+      },
+      "duration_s": 10.0
+    },
+    {
       "file": "roret-brast__youtube-square-5.mp4",
       "media": "video",
       "platform": "google",
