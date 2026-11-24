@@ -2,6 +2,30 @@
   "version": 1,
   "items": [
     {
+      "file": "vinter-snodriva__meta-feed-video-3.mp4",
+      "media": "video",
+      "platform": "meta",
+      "format": "meta-video-portrait",
+      "title": "Snödrivan som landar på bilen (vinter, en tagning)",
+      "copy": "En sammanhängande tagning: snö glider från husets tak och spräcker bilens vindruta, kameran följer väggen och går genom köksfönstret till laptopen med Compricers bilförsäkringssida. Ingen text eller grafik (på begäran).",
+      "alt": "Compricer-annons: Snödrivan som landar på bilen (vinter, en tagning)",
+      "url": "https://www.compricer.se/",
+      "added": "2026-11-24",
+      "width": 1080,
+      "height": 1350,
+      "source": "compricer-kit",
+      "draft": "vinter-snodriva",
+      "sha256": "a08460f38a92bfeb",
+      "status": "draft",
+      "cost_label": "6,00 USD + 500 Runway credits",
+      "cost_total": {
+        "USD": 6.0,
+        "runway_credits": 500.0,
+        "credits": 0.0
+      },
+      "duration_s": 10.0
+    },
+    {
       "file": "blackweek-arstider__youtube-square-3.mp4",
       "media": "video",
       "platform": "google",
